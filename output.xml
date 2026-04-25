@@ -1,60 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.13.7 on win32)" generated="2026-04-25T16:45:04.654735" rpa="false" schemaversion="5">
-<suite id="s1" name="Deep Parsing With Json Library Test" source="C:\Users\User\RobotAutomationFramework\tests\deep_parsing_with_json_library_test.robot">
-<test id="s1-t1" name="Parse Complex JSON With JSONPath" line="5">
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2026-04-25T16:45:06.668932" level="INFO">${json_string} = {"user": {"id": 101, "details": {"name": "John Doe", "roles": ["admin", "editor"]}}}</msg>
-<var>${json_string}</var>
-<arg>{"user": {"id": 101, "details": {"name": "John Doe", "roles": ["admin", "editor"]}}}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2026-04-25T16:45:06.667996" elapsed="0.001298"/>
+<robot generator="Robot 7.3.2 (Python 3.13.7 on win32)" generated="2026-04-25T16:56:24.103967" rpa="false" schemaversion="5">
+<suite id="s1" name="Robot Automation Registration And Login Example" source="C:\Users\User\RobotAutomationFramework\tests\robot_automation_registration_and_login_example.robot">
+<test id="s1-t1" name="Register and Login User" line="13">
+<kw name="Open Browser To Registration Page">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-04-25T16:56:25.566316" level="INFO">Opening browser 'Chrome' to base url 'https://example.com'.</msg>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-04-25T16:56:25.565773" elapsed="6.817537"/>
 </kw>
-<kw name="Convert String To Json" owner="JSONLibrary">
-<msg time="2026-04-25T16:45:06.670647" level="INFO">${json_obj} = {'user': {'id': 101, 'details': {'name': 'John Doe', 'roles': ['admin', 'editor']}}}</msg>
-<var>${json_obj}</var>
-<arg>${json_string}</arg>
-<doc>Convert String to JSON object</doc>
-<status status="PASS" start="2026-04-25T16:45:06.670087" elapsed="0.000661"/>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-04-25T16:56:32.384411" elapsed="0.407662"/>
 </kw>
-<kw name="Get Value From Json" owner="JSONLibrary">
-<msg time="2026-04-25T16:45:06.928717" level="INFO">${names} = ['John Doe']</msg>
-<var>${names}</var>
-<arg>${json_obj}</arg>
-<arg>$.user.details.name</arg>
-<doc>Get Value From JSON using JSONPath</doc>
-<status status="PASS" start="2026-04-25T16:45:06.671371" elapsed="0.257426"/>
+<kw name="Title Should Be" owner="SeleniumLibrary">
+<msg time="2026-04-25T16:56:32.862030" level="INFO">Page title is 'Example Domain'.</msg>
+<arg>Example Domain</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<status status="PASS" start="2026-04-25T16:56:32.792451" elapsed="0.069789"/>
 </kw>
-<kw name="Log To Console" owner="BuiltIn">
-<arg>Extracted Name: ${names[0]}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2026-04-25T16:45:06.940196" elapsed="0.001530"/>
+<status status="PASS" start="2026-04-25T16:56:25.564568" elapsed="7.297912"/>
 </kw>
-<kw name="Get Value From Json" owner="JSONLibrary">
-<msg time="2026-04-25T16:45:06.986876" level="INFO">${first_role} = ['admin']</msg>
-<var>${first_role}</var>
-<arg>${json_obj}</arg>
-<arg>$.user.details.roles[0]</arg>
-<doc>Get Value From JSON using JSONPath</doc>
-<status status="PASS" start="2026-04-25T16:45:06.943451" elapsed="0.043485"/>
+<kw name="Register New User">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-04-25T16:56:32.866879" level="INFO">Typing text 'testuser_123' into text field 'id=username_reg'.</msg>
+<msg time="2026-04-25T16:56:33.059346" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-3.png"&gt;&lt;img src="selenium-screenshot-3.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2026-04-25T16:56:33.059768" level="FAIL">Element with locator 'id=username_reg' not found.</msg>
+<arg>id=username_reg</arg>
+<arg>${user}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="FAIL" start="2026-04-25T16:56:32.866028" elapsed="0.244427">Element with locator 'id=username_reg' not found.</status>
 </kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<arg>${first_role[0]}</arg>
-<arg>admin</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" start="2026-04-25T16:45:06.987422" elapsed="0.000743"/>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>id=email_reg</arg>
+<arg>${email}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2026-04-25T16:56:33.110911" elapsed="0.000093"/>
 </kw>
-<status status="PASS" start="2026-04-25T16:45:06.663338" elapsed="0.325191"/>
+<kw name="Input Password" owner="SeleniumLibrary">
+<arg>id=password_reg</arg>
+<arg>${pass}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2026-04-25T16:56:33.111265" elapsed="0.000087"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>id=submit_registration</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2026-04-25T16:56:33.111642" elapsed="0.000103"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Registration Successful</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="NOT RUN" start="2026-04-25T16:56:33.112058" elapsed="0.000097"/>
+</kw>
+<arg>${USERNAME}</arg>
+<arg>${EMAIL}</arg>
+<arg>${PASSWORD}</arg>
+<status status="FAIL" start="2026-04-25T16:56:32.864983" elapsed="0.247610">Element with locator 'id=username_reg' not found.</status>
+</kw>
+<kw name="Login Existing User">
+<arg>${USERNAME}</arg>
+<arg>${PASSWORD}</arg>
+<status status="NOT RUN" start="2026-04-25T16:56:33.113296" elapsed="0.000100"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-04-25T16:56:33.114303" elapsed="3.899596"/>
+</kw>
+<status status="FAIL" start="2026-04-25T16:56:25.563244" elapsed="11.451219">Element with locator 'id=username_reg' not found.</status>
 </test>
-<status status="PASS" start="2026-04-25T16:45:04.663879" elapsed="2.327223"/>
+<doc>Example for Registration and Login using SeleniumLibrary</doc>
+<status status="FAIL" start="2026-04-25T16:56:24.109877" elapsed="12.909863"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0" skip="0">All Tests</stat>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat name="Deep Parsing With Json Library Test" id="s1" pass="1" fail="0" skip="0">Deep Parsing With Json Library Test</stat>
+<stat name="Robot Automation Registration And Login Example" id="s1" pass="0" fail="1" skip="0">Robot Automation Registration And Login Example</stat>
 </suite>
 </statistics>
 <errors>
