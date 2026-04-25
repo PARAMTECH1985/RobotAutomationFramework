@@ -1,149 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.13.7 on win32)" generated="2026-04-25T16:38:48.290298" rpa="false" schemaversion="5">
-<suite id="s1" name="User Authentication Jwt Token" source="C:\Users\User\RobotAutomationFramework\tests\user_authentication_jwt_token.robot">
-<test id="s1-t1" name="Automated API Call With JWT" line="11">
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-25T16:38:50.826835" level="INFO">&amp;{credentials} = { username=mode | password=12345678 }</msg>
-<var>&amp;{credentials}</var>
-<arg>username=${USERNAME}</arg>
-<arg>password=${PASSWORD}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-25T16:38:50.814753" elapsed="0.012156"/>
-</kw>
-<kw name="POST" owner="RequestsLibrary">
-<msg time="2026-04-25T16:38:51.519523" level="INFO">POST Request : url=http://34.68.7.223:8083/api/auth/signin 
- path_url=/api/auth/signin 
- headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '44', 'Content-Type': 'application/json'} 
- body=b'{"username": "mode", "password": "12345678"}' 
- </msg>
-<msg time="2026-04-25T16:38:51.520016" level="INFO">POST Response : url=http://34.68.7.223:8083/api/auth/signin 
- status=200, reason= 
- headers={'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'X-Content-Type-Options': 'nosniff', 'X-XSS-Protection': '0', 'Cache-Control': 'no-cache, no-store, max-age=0, must-revalidate', 'Pragma': 'no-cache', 'Expires': '0', 'X-Frame-Options': 'DENY', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Sat, 25 Apr 2026 11:08:51 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'} 
- body={"id":1,"username":"mode","email":"rinkoobangalore@gamil.com","roles":["ROLE_USER"],"accessToken":"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtb2RlIiwiaWF0IjoxNzc3MTE1MzMxLCJleHAiOjE3NzcyMDE3MzF9.kcnH9dC7_3Q5ML62HZ80soRQNMNyAgoRtTKlB8CU5gk","tokenType":"Bearer"} 
- </msg>
-<msg time="2026-04-25T16:38:51.520571" level="INFO">${auth_resp} = &lt;Response [200]&gt;</msg>
-<var>${auth_resp}</var>
-<arg>${BASE_URL}/api/auth/signin</arg>
-<arg>json=${credentials}</arg>
-<doc>Sends a POST request.</doc>
-<status status="PASS" start="2026-04-25T16:38:50.830099" elapsed="0.690608"/>
-</kw>
-<kw name="Should Be Equal As Strings" owner="BuiltIn">
-<msg time="2026-04-25T16:38:51.525085" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<arg>${auth_resp.status_code}</arg>
-<arg>200</arg>
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<status status="PASS" start="2026-04-25T16:38:51.522008" elapsed="0.003491"/>
-</kw>
+<robot generator="Robot 7.3.2 (Python 3.13.7 on win32)" generated="2026-04-25T16:45:04.654735" rpa="false" schemaversion="5">
+<suite id="s1" name="Deep Parsing With Json Library Test" source="C:\Users\User\RobotAutomationFramework\tests\deep_parsing_with_json_library_test.robot">
+<test id="s1-t1" name="Parse Complex JSON With JSONPath" line="5">
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2026-04-25T16:38:51.530410" level="INFO">${jwt_token} = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtb2RlIiwiaWF0IjoxNzc3MTE1MzMxLCJleHAiOjE3NzcyMDE3MzF9.kcnH9dC7_3Q5ML62HZ80soRQNMNyAgoRtTKlB8CU5gk</msg>
-<var>${jwt_token}</var>
-<arg>${auth_resp.json()}[accessToken]</arg>
+<msg time="2026-04-25T16:45:06.668932" level="INFO">${json_string} = {"user": {"id": 101, "details": {"name": "John Doe", "roles": ["admin", "editor"]}}}</msg>
+<var>${json_string}</var>
+<arg>{"user": {"id": 101, "details": {"name": "John Doe", "roles": ["admin", "editor"]}}}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2026-04-25T16:38:51.528428" elapsed="0.002131"/>
+<status status="PASS" start="2026-04-25T16:45:06.667996" elapsed="0.001298"/>
 </kw>
-<kw name="Log" owner="BuiltIn">
-<msg time="2026-04-25T16:38:51.531826" level="INFO">JWT Token is: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtb2RlIiwiaWF0IjoxNzc3MTE1MzMxLCJleHAiOjE3NzcyMDE3MzF9.kcnH9dC7_3Q5ML62HZ80soRQNMNyAgoRtTKlB8CU5gk</msg>
-<arg>JWT Token is: ${jwt_token}</arg>
-<doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-04-25T16:38:51.531289" elapsed="0.000731"/>
+<kw name="Convert String To Json" owner="JSONLibrary">
+<msg time="2026-04-25T16:45:06.670647" level="INFO">${json_obj} = {'user': {'id': 101, 'details': {'name': 'John Doe', 'roles': ['admin', 'editor']}}}</msg>
+<var>${json_obj}</var>
+<arg>${json_string}</arg>
+<doc>Convert String to JSON object</doc>
+<status status="PASS" start="2026-04-25T16:45:06.670087" elapsed="0.000661"/>
 </kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-25T16:38:51.533720" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtb2RlIiwiaWF0IjoxNzc3MTE1MzMxLCJleHAiOjE3NzcyMDE3MzF9.kcnH9dC7_3Q5ML62HZ80soRQNMNyAgoRtTKlB8CU5gk }</msg>
-<var>&amp;{headers}</var>
-<arg>Authorization=Bearer ${jwt_token}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-25T16:38:51.532748" elapsed="0.001103"/>
+<kw name="Get Value From Json" owner="JSONLibrary">
+<msg time="2026-04-25T16:45:06.928717" level="INFO">${names} = ['John Doe']</msg>
+<var>${names}</var>
+<arg>${json_obj}</arg>
+<arg>$.user.details.name</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="PASS" start="2026-04-25T16:45:06.671371" elapsed="0.257426"/>
 </kw>
-<kw name="Log" owner="BuiltIn">
-<msg time="2026-04-25T16:38:51.534911" level="INFO">Header is: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtb2RlIiwiaWF0IjoxNzc3MTE1MzMxLCJleHAiOjE3NzcyMDE3MzF9.kcnH9dC7_3Q5ML62HZ80soRQNMNyAgoRtTKlB8CU5gk'}</msg>
-<arg>Header is: ${headers}</arg>
-<doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-04-25T16:38:51.534474" elapsed="0.000591"/>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Extracted Name: ${names[0]}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-04-25T16:45:06.940196" elapsed="0.001530"/>
 </kw>
-<kw name="Log" owner="BuiltIn">
-<msg time="2026-04-25T16:38:51.536010" level="INFO">Calling API: http://34.68.7.223:8083/api/test/user</msg>
-<arg>Calling API: ${BASE_URL}/api/test/user</arg>
-<doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-04-25T16:38:51.535598" elapsed="0.000550"/>
+<kw name="Get Value From Json" owner="JSONLibrary">
+<msg time="2026-04-25T16:45:06.986876" level="INFO">${first_role} = ['admin']</msg>
+<var>${first_role}</var>
+<arg>${json_obj}</arg>
+<arg>$.user.details.roles[0]</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="PASS" start="2026-04-25T16:45:06.943451" elapsed="0.043485"/>
 </kw>
-<kw name="GET" owner="RequestsLibrary">
-<msg time="2026-04-25T16:38:52.087301" level="INFO">GET Request : url=http://34.68.7.223:8083/api/test/user 
- path_url=/api/test/user 
- headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtb2RlIiwiaWF0IjoxNzc3MTE1MzMxLCJleHAiOjE3NzcyMDE3MzF9.kcnH9dC7_3Q5ML62HZ80soRQNMNyAgoRtTKlB8CU5gk'} 
- body=None 
- </msg>
-<msg time="2026-04-25T16:38:52.087431" level="INFO">GET Response : url=http://34.68.7.223:8083/api/test/user 
- status=200, reason= 
- headers={'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'X-Content-Type-Options': 'nosniff', 'X-XSS-Protection': '0', 'Cache-Control': 'no-cache, no-store, max-age=0, must-revalidate', 'Pragma': 'no-cache', 'Expires': '0', 'X-Frame-Options': 'DENY', 'Content-Type': 'text/plain;charset=UTF-8', 'Content-Length': '13', 'Date': 'Sat, 25 Apr 2026 11:08:51 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'} 
- body=User Content. 
- </msg>
-<msg time="2026-04-25T16:38:52.087629" level="INFO">${user_resp} = &lt;Response [200]&gt;</msg>
-<var>${user_resp}</var>
-<arg>${BASE_URL}/api/test/user</arg>
-<arg>headers=${headers}</arg>
-<doc>Sends a GET request.</doc>
-<status status="PASS" start="2026-04-25T16:38:51.536665" elapsed="0.551008"/>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${first_role[0]}</arg>
+<arg>admin</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-04-25T16:45:06.987422" elapsed="0.000743"/>
 </kw>
-<kw name="Log" owner="BuiltIn">
-<msg time="2026-04-25T16:38:52.089196" level="INFO">User API Response: User Content.</msg>
-<arg>User API Response: ${user_resp.text}</arg>
-<doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-04-25T16:38:52.088554" elapsed="0.000711"/>
-</kw>
-<kw name="Should Be Equal As Strings" owner="BuiltIn">
-<msg time="2026-04-25T16:38:52.090043" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<arg>${user_resp.status_code}</arg>
-<arg>200</arg>
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<status status="PASS" start="2026-04-25T16:38:52.089514" elapsed="0.000609"/>
-</kw>
-<kw name="Log" owner="BuiltIn">
-<msg time="2026-04-25T16:38:52.090552" level="INFO">Calling API: http://34.68.7.223:8083/api/test/all</msg>
-<arg>Calling API: ${BASE_URL}/api/test/all</arg>
-<doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-04-25T16:38:52.090373" elapsed="0.000245"/>
-</kw>
-<kw name="GET" owner="RequestsLibrary">
-<msg time="2026-04-25T16:38:52.640959" level="INFO">GET Request : url=http://34.68.7.223:8083/api/test/all 
- path_url=/api/test/all 
- headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtb2RlIiwiaWF0IjoxNzc3MTE1MzMxLCJleHAiOjE3NzcyMDE3MzF9.kcnH9dC7_3Q5ML62HZ80soRQNMNyAgoRtTKlB8CU5gk'} 
- body=None 
- </msg>
-<msg time="2026-04-25T16:38:52.641289" level="INFO">GET Response : url=http://34.68.7.223:8083/api/test/all 
- status=200, reason= 
- headers={'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'X-Content-Type-Options': 'nosniff', 'X-XSS-Protection': '0', 'Cache-Control': 'no-cache, no-store, max-age=0, must-revalidate', 'Pragma': 'no-cache', 'Expires': '0', 'X-Frame-Options': 'DENY', 'Content-Type': 'text/plain;charset=UTF-8', 'Content-Length': '15', 'Date': 'Sat, 25 Apr 2026 11:08:52 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'} 
- body=Public Content. 
- </msg>
-<msg time="2026-04-25T16:38:52.642395" level="INFO">${all_resp} = &lt;Response [200]&gt;</msg>
-<var>${all_resp}</var>
-<arg>${BASE_URL}/api/test/all</arg>
-<arg>headers=${headers}</arg>
-<doc>Sends a GET request.</doc>
-<status status="PASS" start="2026-04-25T16:38:52.090854" elapsed="0.551680"/>
-</kw>
-<kw name="Log" owner="BuiltIn">
-<msg time="2026-04-25T16:38:52.646525" level="INFO">All API Response: Public Content.</msg>
-<arg>All API Response: ${all_resp.text}</arg>
-<doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-04-25T16:38:52.643669" elapsed="0.003087"/>
-</kw>
-<kw name="Should Be Equal As Strings" owner="BuiltIn">
-<msg time="2026-04-25T16:38:52.649587" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<arg>${all_resp.status_code}</arg>
-<arg>200</arg>
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<status status="PASS" start="2026-04-25T16:38:52.647758" elapsed="0.002068"/>
-</kw>
-<status status="PASS" start="2026-04-25T16:38:50.812582" elapsed="1.838702"/>
+<status status="PASS" start="2026-04-25T16:45:06.663338" elapsed="0.325191"/>
 </test>
-<status status="PASS" start="2026-04-25T16:38:48.322679" elapsed="4.332077"/>
+<status status="PASS" start="2026-04-25T16:45:04.663879" elapsed="2.327223"/>
 </suite>
 <statistics>
 <total>
@@ -152,7 +54,7 @@
 <tag>
 </tag>
 <suite>
-<stat name="User Authentication Jwt Token" id="s1" pass="1" fail="0" skip="0">User Authentication Jwt Token</stat>
+<stat name="Deep Parsing With Json Library Test" id="s1" pass="1" fail="0" skip="0">Deep Parsing With Json Library Test</stat>
 </suite>
 </statistics>
 <errors>
